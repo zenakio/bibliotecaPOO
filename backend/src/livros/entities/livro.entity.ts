@@ -3,7 +3,7 @@ export class Livro {
     id: number;
     titulo: string;
     autor: string;
-    qtd_paginas: number;
+    qtd_pagina: number;
     disponivel: boolean;
     //Métodos
     //Construtor

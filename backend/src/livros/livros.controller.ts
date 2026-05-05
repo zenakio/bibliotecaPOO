@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { LivrosService } from './livros.service';
-import { UpdateLivroDto } from './dto/update-livro.dto';
+import { Livro } from './entities/livro.entity';
 
 @Controller('livros')
 export class LivrosController {
   constructor(private readonly livrosService: LivrosService) {}
 
   @Post()
-  create(@Body() dados: {titulo: string, autor: string, qtd_paginas: number}) {
-    return this.livrosService.create(dados.titulo, dados.autor, dados.qtd_paginas);
+  create(@Body() dados: {titulo: string, autor: string, qtd_pagina: number}) {
+    return this.livrosService.create(dados.titulo, dados.autor, dados.qtd_pagina);
   }
 
   @Get()
@@ -22,8 +22,8 @@ export class LivrosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLivroDto: UpdateLivroDto) {
-    return this.livrosService.update(+id, updateLivroDto);
+  update(@Param('id') id: string, @Body() dados: Partial<Livro>) {
+    return this.livrosService.update(+id, dados);
   }
 
   @Delete(':id')
